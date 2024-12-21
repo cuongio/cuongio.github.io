@@ -4,23 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang giải trí số 1 Việt Nam</title>
+    <title>Cuongpipe - Trang cá nhân</title>
+    
     <!-- Thư viện Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Chống cache -->
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <style>
         /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: #f8f9fa;
-            color: #333;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            color: #fff;
             overflow-x: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Header Styles */
         header {
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.8);
             color: white;
             padding: 20px 0;
             text-align: center;
@@ -29,31 +44,37 @@
         }
 
         header img {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             position: absolute;
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
+            border: 3px solid white;
         }
 
         header h1 {
             margin: 0; 
-            font-size: 1.8em;
-            letter-spacing: 1px;
+            font-size: 2.5em;
+            letter-spacing: 2px;
             text-transform: uppercase;
+        }
+
+        header h1 span {
+            color: #00f2fe;
         }
 
         /* Main Content */
         .container {
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
+            animation: fadeIn 2s ease-in-out;
         }
 
         .container p {
-            font-size: 1.5em;
-            color: #555;
+            font-size: 1.8em;
+            color: #f0f0f0;
         }
 
         /* Button Container */
@@ -62,29 +83,31 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
+            margin-top: 40px;
         }
 
         .btn {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             gap: 10px;
-            padding: 15px 20px;
-            background-color: #0071e3;
+            padding: 15px 30px;
+            background-color: rgba(255, 255, 255, 0.15);
             color: white;
             text-decoration: none;
-            border-radius: 25px;
-            font-size: 1em;
+            border-radius: 30px;
+            font-size: 1.2em;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
-            width: 280px;
+            backdrop-filter: blur(5px);
+            width: 320px;
         }
 
         .btn:hover {
-            background-color: #005bb5;
-            transform: translateY(-6px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .btn i {
@@ -92,10 +115,42 @@
         }
 
         @media (max-width: 600px) {
-            .btn {
-                font-size: 0.9em;
-                padding: 10px 15px;
-                width: 90%;
+    header img {
+        width: 60px;
+        height: 60px;
+        left: 10px;
+    }
+
+    header h1 {
+        font-size: 2em;
+        padding-left: 80px; /* Điều chỉnh lại khoảng cách với logo khi màn hình nhỏ */
+    }
+}
+
+        /* Offline Message */
+        #offline-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: red;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            z-index: 1000;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -103,9 +158,12 @@
 <body>
     <!-- Header -->
     <header>
-        <img src="logo.png" alt="Logo Cuongpipe">
-        <h1>Cuongpipe</h1>
+        <img src="logo/logo.png" alt="Logo Cuongpipe">
+        <h1>Cuong<span>pipe</span></h1>
     </header>
+
+    <!-- Offline Message -->
+    <div id="offline-message">Bạn đang ở chế độ ngoại tuyến. Vui lòng kết nối Internet để tiếp tục.</div>
 
     <!-- Main Content -->
     <div class="container">
@@ -118,15 +176,10 @@
             </a>
             <a href="https://www.youtube.com/@cuongvideos" class="btn" target="_blank">
                 <i class="fab fa-youtube"></i> My Channel Youtube
-            </a>           
+            </a>
             <a href="https://www.github.com/cuongctb" class="btn" target="_blank">
                 <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://www.github.com/cuongio" class="btn" target="_blank">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-
-            
             <a href="https://sites.google.com/view/superphao/h%E1%BB%8Dc-k%E1%BB%B3-3" class="btn" target="_blank">
                 <i class="fa fa-globe"></i> Tài liệu học tập
             </a>
