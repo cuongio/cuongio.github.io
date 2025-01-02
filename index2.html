@@ -8,58 +8,42 @@
     body {
       margin: 0;
       overflow: hidden;
-    }
-    #video-container {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background: black;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
     }
   </style>
 </head>
 <body>
-  <div id="video-container">
-    <iframe id="youtube-video" src="https://www.youtube.com/embed/xYlvKMCU6_c?autoplay=1&controls=0&showinfo=0&rel=0&modestbranding=1&fs=1&loop=1&playlist=xYlvKMCU6_c" allow="autoplay" allowfullscreen></iframe>
-  </div>
+  <video id="scary-video" autoplay muted playsinline>
+    <source src="https://github.com/cuongio/cuongio.github.io/raw/refs/heads/main/y2mate.com%20-%20Jump%20scarevideo%20that%20will%20scare%20your%20friends_360p.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
   <script>
+    // Tăng âm lượng tối đa
+    const video = document.getElementById('scary-video');
+    video.muted = false; // Bật âm thanh
+    video.volume = 1.0;  // Tăng âm lượng tối đa
+
     // Khóa chuột phải
     document.addEventListener('contextmenu', (e) => {
       e.preventDefault();
     });
 
     // Ép full màn hình
-    const videoContainer = document.getElementById('video-container');
     document.addEventListener('DOMContentLoaded', () => {
-      if (videoContainer.requestFullscreen) {
-        videoContainer.requestFullscreen();
-      } else if (videoContainer.webkitRequestFullscreen) {
-        videoContainer.webkitRequestFullscreen();
-      } else if (videoContainer.msRequestFullscreen) {
-        videoContainer.msRequestFullscreen();
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
       }
     });
-
-    // Tăng âm lượng tối đa
-    const iframe = document.getElementById('youtube-video');
-    iframe.onload = () => {
-      const player = new YT.Player(iframe, {
-        events: {
-          onReady: (event) => {
-            event.target.setVolume(100); // Tăng âm lượng tối đa
-          }
-        }
-      });
-    };
   </script>
-
-  <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
