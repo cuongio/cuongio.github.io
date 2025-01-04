@@ -1,49 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surprise Video</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: black;
-    }
-    video {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm Ngược Tết 2025</title>
+    <style>
+        /* Reset CSS */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-background iframe {
+            width: 100vw;
+            height: 56.25vw; /* Tỷ lệ khung hình 16:9 */
+            min-height: 100vh;
+            min-width: 177.78vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        /* Countdown Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            margin-top: 10%;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px #000;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px #000;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .time-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            width: 100px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .time-box span {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .time-box p {
+            font-size: 1em;
+            margin: 0;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 1.2em;
+            text-shadow: 2px 2px 8px #000;
+        }
+    </style>
 </head>
 <body>
-  <video id="scary-video" autoplay muted playsinline>
-    <source src="https://github.com/cuongio/cuongio.github.io/raw/refs/heads/main/y2mate.com%20-%20Jump%20scarevideo%20that%20will%20scare%20your%20friends_360p.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+    <!-- Video Background -->
+    <div class="video-background">
+        <iframe src="https://www.youtube.com/embed/82vqZhtIkU4?autoplay=1&mute=1&loop=1&playlist=82vqZhtIkU4&controls=0&showinfo=0&modestbranding=1" 
+        frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
 
-  <script>
-    // Tăng âm lượng tối đa
-    const video = document.getElementById('scary-video');
-    video.muted = false; // Bật âm thanh
-    video.volume = 1.0;  // Tăng âm lượng tối đa
+    <!-- Countdown Content -->
+    <div class="container">
+        <h1>🎆 Chào Mừng Năm Mới 2025 🎇</h1>
+        <h2>Thời gian còn lại đến giao thừa:</h2>
+        <div id="countdown">
+            <div class="time-box">
+                <span id="days">00</span>
+                <p>Ngày</p>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <p>Giờ</p>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <p>Phút</p>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <p>Giây</p>
+            </div>
+        </div>
+        <p class="footer">Chúc bạn và gia đình một năm mới An Khang Thịnh Vượng!</p>
+    </div>
 
-    // Khóa chuột phải
-    document.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-    });
+    <script>
+        function countdownToTet() {
+            const tetDate = new Date('2025-01-29T00:00:00'); // Thời điểm giao thừa Tết 2025
+            const now = new Date();
+            const difference = tetDate - now;
 
-    // Ép full màn hình
-    document.addEventListener('DOMContentLoaded', () => {
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
-      }
-    });
-  </script>
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((difference / (1000 * 60)) % 60);
+            const seconds = Math.floor((difference / 1000) % 60);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Cập nhật mỗi giây
+        setInterval(countdownToTet, 1000);
+        countdownToTet();
+    </script>
 </body>
 </html>
