@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đếm Ngược Tết 2025</title>
+    <title>Đếm Ngược Tết 2026</title>
     <style>
         /* Reset CSS */
         body, html {
@@ -120,8 +120,8 @@
                 <p>Giây</p>
             </div>
             <div class="time-box">
-                <span id="Miliseconds">00</span>
-                <p> Mili Giây</p>
+                <span id="miliseconds">000</span>
+                <p>Miligiây</p>
             </div>
         </div>
         <p class="footer">Chúc bạn và gia đình một năm mới An Khang Thịnh Vượng!</p>
@@ -129,24 +129,33 @@
 
     <script>
         function countdownToTet() {
-            const tetDate = new Date('2026-02-17T00:00:00'); // Thời điểm giao thừa Tết 2025
+            const tetDate = new Date('2026-02-17T00:00:00'); // Thời điểm giao thừa
             const now = new Date();
             const difference = tetDate - now;
+
+            if (difference <= 0) {
+                document.getElementById('days').textContent = "00";
+                document.getElementById('hours').textContent = "00";
+                document.getElementById('minutes').textContent = "00";
+                document.getElementById('seconds').textContent = "00";
+                document.getElementById('miliseconds').textContent = "000";
+                return;
+            }
 
             const days = Math.floor(difference / (1000 * 60 * 60 * 24));
             const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((difference / (1000 * 60)) % 60);
             const seconds = Math.floor((difference / 1000) % 60);
-            const miliseconds = Math.floor((difference / 1000);
+            const miliseconds = difference % 1000; // Lấy phần dư của mili giây
 
             document.getElementById('days').textContent = days.toString().padStart(2, '0');
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            document.getElementById('miliseconds').textContent = miliseconds.toString().padStart(2, '0');
-            
+            document.getElementById('miliseconds').textContent = miliseconds.toString().padStart(3, '0');
+        }
 
-        // Cập nhật mỗi giây
+        // Cập nhật mỗi 100ms
         setInterval(countdownToTet, 100);
         countdownToTet();
     </script>
