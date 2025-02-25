@@ -3,16 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đếm Ngược Tết 2026</title>
+    <title>Đếm Ngược Tết 2026 🎆</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1"></script>
     <style>
-        /* Reset CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body, html {
             width: 100%;
             height: 100%;
@@ -25,15 +19,14 @@
             background: linear-gradient(45deg, #1e3c72, #2a5298, #ff6a00, #ee0979);
             background-size: 300% 300%;
             animation: gradientBG 10s infinite alternate;
+            overflow: hidden;
         }
 
-        /* Background Gradient Animation */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
 
-        /* Countdown Container */
         .container {
             padding: 30px;
             background: rgba(0, 0, 0, 0.5);
@@ -42,20 +35,12 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             max-width: 500px;
             width: 90%;
+            position: relative;
+            z-index: 10;
         }
 
-        h1 {
-            font-size: 2.5em;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.5);
-        }
-
-        h2 {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
+        h1 { font-size: 2.5em; font-weight: 700; margin-bottom: 10px; }
+        h2 { font-size: 1.2em; margin-bottom: 20px; opacity: 0.9; }
 
         #countdown {
             display: flex;
@@ -72,95 +57,65 @@
             text-align: center;
             backdrop-filter: blur(5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
         }
 
-        .time-box:hover {
-            transform: translateY(-5px);
-        }
+        .time-box span { font-size: 2.5em; font-weight: bold; color: #fff; }
+        .time-box p { font-size: 0.9em; margin: 0; opacity: 0.8; }
 
-        .time-box span {
-            font-size: 2.5em;
-            font-weight: bold;
-            display: block;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-        }
-
-        .time-box p {
-            font-size: 0.9em;
-            margin: 0;
-            opacity: 0.8;
-        }
-
-        .footer {
-            margin-top: 20px;
-            font-size: 1em;
-            opacity: 0.8;
-        }
+        #weather { margin-top: 20px; font-size: 1.1em; font-weight: bold; }
     </style>
 </head>
 <body>
-    <!-- Countdown Content -->
     <div class="container">
         <h1>🎆 Chào Mừng Năm Mới 2026 🎇</h1>
         <h2>Thời gian còn lại đến giao thừa:</h2>
         <div id="countdown">
-            <div class="time-box">
-                <span id="days">00</span>
-                <p>Ngày</p>
-            </div>
-            <div class="time-box">
-                <span id="hours">00</span>
-                <p>Giờ</p>
-            </div>
-            <div class="time-box">
-                <span id="minutes">00</span>
-                <p>Phút</p>
-            </div>
-            <div class="time-box">
-                <span id="seconds">00</span>
-                <p>Giây</p>
-            </div>
-            <div class="time-box">
-                <span id="miliseconds">000</span>
-                <p>Miligiây</p>
-            </div>
+            <div class="time-box"><span id="days">00</span><p>Ngày</p></div>
+            <div class="time-box"><span id="hours">00</span><p>Giờ</p></div>
+            <div class="time-box"><span id="minutes">00</span><p>Phút</p></div>
+            <div class="time-box"><span id="seconds">00</span><p>Giây</p></div>
         </div>
-        <p class="footer">Chúc bạn và gia đình một năm mới An Khang Thịnh Vượng!</p>
+
+        <!-- Dự báo thời tiết -->
+        <div id="weather">⛅ Đang tải dự báo thời tiết...</div>
     </div>
 
     <script>
         function countdownToTet() {
-            const tetDate = new Date('2026-02-17T00:00:00'); // Thời điểm giao thừa
+            const tetDate = new Date('2026-02-17T00:00:00');
             const now = new Date();
             const difference = tetDate - now;
 
-            if (difference <= 0) {
-                document.getElementById('days').textContent = "00";
-                document.getElementById('hours').textContent = "00";
-                document.getElementById('minutes').textContent = "00";
-                document.getElementById('seconds').textContent = "00";
-                document.getElementById('miliseconds').textContent = "000";
-                return;
-            }
-
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((difference / (1000 * 60)) % 60);
-            const seconds = Math.floor((difference / 1000) % 60);
-            const miliseconds = difference % 1000; // Lấy phần dư của mili giây
-
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            document.getElementById('miliseconds').textContent = miliseconds.toString().padStart(3, '0');
+            document.getElementById('days').textContent = Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('hours').textContent = Math.floor((difference / (1000 * 60 * 60)) % 24).toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = Math.floor((difference / (1000 * 60)) % 60).toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = Math.floor((difference / 1000) % 60).toString().padStart(2, '0');
         }
 
-        // Cập nhật mỗi 100ms
-        setInterval(countdownToTet, 100);
+        function fetchWeather() {
+            const weatherElement = document.getElementById("weather");
+            const weatherAPIKey = 'bd5e378503939ddaee76f12ad7a97608'; // Thay bằng API Key của bạn
+
+            fetch('http://ip-api.com/json')
+                .then(response => response.json())
+                .then(locationData => {
+                    const { lat, lon, city, country } = locationData;
+                    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=vi&appid=${weatherAPIKey}`)
+                        .then(response => response.json())
+                        .then(weatherData => {
+                            const temp = weatherData.main.temp;
+                            const description = weatherData.weather[0].description;
+                            weatherElement.textContent = `📍 ${city}, ${country} | 🌡 ${temp}°C - ${description.charAt(0).toUpperCase() + description.slice(1)}`;
+                        });
+                })
+                .catch(() => {
+                    weatherElement.textContent = "❌ Không thể lấy dữ liệu thời tiết!";
+                });
+        }
+
+        setInterval(countdownToTet, 1000);
         countdownToTet();
+        fetchWeather();
     </script>
 </body>
 </html>
