@@ -100,7 +100,7 @@
 
     <!-- Countdown Content -->
     <div class="container">
-        <h1>🎆 Chào Mừng Năm Mới 2025 🎇</h1>
+        <h1>🎆 Chào Mừng Năm Mới 2026 🎇</h1>
         <h2>Thời gian còn lại đến giao thừa:</h2>
         <div id="countdown">
             <div class="time-box">
@@ -119,13 +119,17 @@
                 <span id="seconds">00</span>
                 <p>Giây</p>
             </div>
+            <div class="time-box">
+                <span id="Miliseconds">00</span>
+                <p> Mili Giây</p>
+            </div>
         </div>
         <p class="footer">Chúc bạn và gia đình một năm mới An Khang Thịnh Vượng!</p>
     </div>
 
     <script>
         function countdownToTet() {
-            const tetDate = new Date('2025-01-29T00:00:00'); // Thời điểm giao thừa Tết 2025
+            const tetDate = new Date('2026-02-17T00:00:00'); // Thời điểm giao thừa Tết 2025
             const now = new Date();
             const difference = tetDate - now;
 
@@ -133,15 +137,17 @@
             const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((difference / (1000 * 60)) % 60);
             const seconds = Math.floor((difference / 1000) % 60);
+            const miliseconds = Math.floor((difference / 1000);
 
             document.getElementById('days').textContent = days.toString().padStart(2, '0');
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
+            document.getElementById('miliseconds').textContent = miliseconds.toString().padStart(2, '0');
+            
 
         // Cập nhật mỗi giây
-        setInterval(countdownToTet, 1000);
+        setInterval(countdownToTet, 100);
         countdownToTet();
     </script>
 </body>
